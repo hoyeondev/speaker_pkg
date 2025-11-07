@@ -12,19 +12,26 @@ class SpeakerNode(Node):
             self.command_callback,
             10
         )
-        self.last_command = None  # 마지막으로 재생한 명령 저장
 
     def command_callback(self, msg):
-        # 같은 명령이 다시 들어오면 무시
-        if msg.data == self.last_command:
-            self.get_logger().info(f"중복 명령 '{msg.data}' 무시")
-            return
-
-        self.last_command = msg.data  # 현재 명령 저장
 
         if msg.data == "start_delivery":
             self.get_logger().info("배달 시작 음성 재생")
             os.system("aplay ~/sound/start_delivery.wav")
+
+        if msg.data == "arrival":
+            self.get_logger().info("arrival 음성 재생")
+            os.system("aplay ~/sound/arrival.wav")
+
+        if msg.data == "user_authentication":
+            self.get_logger().info("user_authentication 재생")
+            os.system("aplay ~/sound/user_authentication.wav")
+
+
+        if msg.data == "finish_delivery":
+            self.get_logger().info("finish_delivery 재생")
+            os.system("aplay ~/sound/finish_delivery.wav")
+
 
 def main(args=None):
     rclpy.init(args=args)
