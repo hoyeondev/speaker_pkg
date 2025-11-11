@@ -24,7 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'speaker_node = scout_robot.speaker_node:main'
+            'speaker_node = speaker_pkg.speaker_node:main'
         ],
     },
 )
